@@ -1,4 +1,6 @@
 import pandas as pd
+import time
+
 from scripts.base_class import BaseClass
 
 base_class = BaseClass()
@@ -20,6 +22,7 @@ def similar_rate(list1, list2, missing_str):
 
 def hca(params):
     res_dataset = []
+    timestamp = int(round(time.time() * 1000))
 
     file_path_1 = params['compare_file_path']
     file_path_2 = params['contrast_file_path']
@@ -48,7 +51,7 @@ def hca(params):
 
         
         res_df = pd.DataFrame(res_dataset, columns=['Sam1', 'Sam2', 'Diff_Num', 'Similar_Rate'])
-        base_class.append_write_csv_by_df(res_df, output_path, 'hca_compare_result')
+        base_class.append_write_csv_by_df(res_df, output_path, 'hca_compare_result_{}'.format(timestamp))
 
     else:
         raise RuntimeError('Both matrices should have the same number of columns')

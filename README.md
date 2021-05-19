@@ -1,5 +1,5 @@
 # HTP
-> Haplotype-tag polymorphisms (HTP) is a high-resolution, high-efficient, and low-cost molecular marker which can serve as a low cost, time, and high-throughput genotyping resources for genetic mapping, germplasm resource analysis and genomics-informed breeding in maize. This platform is an open source web server and free software that fully support HTP mark with comprehensive analysis include crossing pattern in maize heterosis and DNA fingerprint analysis.
+> Haplotype-tag polymorphisms (HTP) is a high-resolution, high-efficient, and low-cost molecular marker which can serve as a low cost, time, and high-throughput genotyping resources for genetic mapping, germplasm resource analysis and genomics-informed breeding in maize. 
 
 ## Dependance
 
@@ -16,65 +16,103 @@ python3 -m venv venv
 
 source ./venv/bin/activate
 
-pip install -r requirements.txt
+pip3 install -r requirements.txt
 
-pip install --editable .
+pip3 install --editable .
 ```
 
 ### SNP2HTP
 
+**Description**
+
+> Convert SNP data into HTP data
+
+**Usage**
+
+- mode one
+
 ```bash
-(venv) (base) jovyan@b6da7f9716dd:~/work/plantdna/htp$ htp
-Please select mode (snp2htp, wghca, hca): snp2htp
-Please type input file path: /home/jovyan/work/plantdna/htp/dataset/template_genotyping.txt
-Please type output dir path [/home/jovyan/work/plantdna/htp/output]: 
-Please type contrast file path [/]: 
-Please type similarity threshold [0.8]: 
-Please type missing string [---]: 
+(venv) (base) root:~/home/plantdna/htp$ htp-snp2htp
+Please type input file path: /home/plantdna/htp/dataset/template_genotyping.txt
+Please type output dir path [/home/plantdna/htp/output]: 
 ```
+
+- mode two
+
+```bash
+htp-snp2htp -i /home/plantdna/htp/dataset/template_genotyping.txt -o /home/plantdna/htp/output
+```
+
+**Input file**
+
+> /home/plantdna/htp/dataset/template_genotyping.txt
+
+**Output file**
+
+> /home/plantdna/htp/output/{$genotyping_file_name}_{$timestamp}/all_htps.csv
 
 ### HCA
 
+**Description**
+
 > HTP comparison algorithm
 
+**Usage**
+
+- mode one
+
 ```bash
-(venv) (base) jovyan@b6da7f9716dd:~/work/plantdna/htp$ htp
-Please select mode (snp2htp, wghca, hca): hca
-Please type input file path: /home/jovyan/work/plantdna/htp/dataset/hca_template.csv
-Please type output dir path [/home/jovyan/work/plantdna/htp/output]: 
-Please type contrast file path [/]: /home/jovyan/work/plantdna/htp/dataset/hca_template.csv
-Please type similarity threshold [0.8]: 
+(venv) (base) root:~/home/plantdna/htp$ htp-hca
+Please type input file path: /home/plantdna/htp/dataset/hca_template.csv
+Please type contrast file path [/]: /home/plantdna/htp/dataset/hca_template.csv
+Please type output dir path [/home/plantdna/htp/output]: 
 Please type missing string [---]: 
 ```
+
+- mode two
+
+```bash
+htp-hca -i /home/plantdna/htp/dataset/hca_template.csv -c /home/plantdna/htp/dataset/hca_template.csv -o /home/plantdna/htp/output -ms ---
+```
+**Input file**
+
+- compare file path: /home/plantdna/htp/dataset/hca_template.csv
+- contrast file path: /home/plantdna/htp/dataset/hca_template.csv
+
+**Output file**
+
+> /home/plantdna/htp/output/hca_compare_result_{$timestamp}.csv
+
 
 ### WGHCA
 
+**Description**
 > Whole genome haplotype comparison algorithm
 
+**Usage**
+
+- mode one
+
 ```bash
-(venv) (base) jovyan@b6da7f9716dd:~/work/plantdna/htp$ htp
-Please select mode (snp2htp, wghca, hca): wghca
-Please type input file path: /home/jovyan/work/plantdna/htp/dataset/wghca_template.csv
-Please type output dir path [/home/jovyan/work/plantdna/htp/output]: 
-Please type contrast file path [/]: /home/jovyan/work/plantdna/htp/dataset/wghca_template.csv
+(venv) (base) root:~/work/plantdna/htp$ htp-wghca
+Please type input file path: /home/plantdna/htp/dataset/wghca_template.csv
+Please type contrast file path [/]: /home/plantdna/htp/dataset/wghca_template.csv
+Please type output dir path [/home/plantdna/htp/output]: 
 Please type similarity threshold [0.8]: 
 Please type missing string [---]: 
 ```
-### help
+
+- mode two
 
 ```bash
-(venv) (base) jovyan@b6da7f9716dd:~/work/plantdna/htp$ htp -h
-Usage: htp [OPTIONS]
-
-  Welcome use htp cli
-
-Options:
-  -m, --mode [snp2htp|wghca|hca]  mode options.
-  -i, --input PATH                input file path.
-  -o, --output PATH               output dir path.  [default: /home/jovyan/work/plantdna/htp/output]
-  -c, --contrast PATH             contrast file path (This is required when the mode is HCA and WGHCA).  [default: /]
-  -st, --similarity_threshold FLOAT
-                                  similarity threshold.  [default: 0.8]
-  -ms, --missing_string TEXT      missing string.  [default: ---]
-  -h, --help                      Show this message and exit.
+htp-wghca -i /home/plantdna/htp/dataset/wghca_template.csv -o /home/plantdna/htp/output -c /home/plantdna/htp/dataset/wghca_template.csv -st 0.8 -ms ---
 ```
+
+**Input file**
+
+- compare file path: /home/plantdna/htp/dataset/wghca_template.csv
+- contrast file path: /home/plantdna/htp/dataset/wghca_template.csv
+
+**Output file**
+
+> /home/plantdna/htp/output/wghca_compare_result_{$timestamp}.csv

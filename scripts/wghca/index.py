@@ -1,4 +1,6 @@
 import pandas as pd
+import time
+
 from scripts.base_class import BaseClass
 
 base_class = BaseClass()
@@ -11,8 +13,13 @@ def str_compare(str1, str2):
         for i in range(len(str1)):
             if str1[i] == str2[i]:
                 common_num+=1
-
-        return round(common_num/len(str1), 3)
+        if len(str1) <= 10:
+            if common_num == len(str1):
+                return round(common_num/len(str1), 3)
+            else:
+                return 0
+        else:
+            return round(common_num/len(str1), 3)
 
 
 def similar_rate(list1, list2, st):
@@ -33,6 +40,8 @@ def wghca(params):
     st = params['st']
     
     res_dataset = []
+    timestamp = int(round(time.time() * 1000))
+
 
     file1_df = pd.read_csv(compare_file_path)
     file2_df = pd.read_csv(contrast_file_path)
@@ -54,7 +63,7 @@ def wghca(params):
                 ])
 
         res_df = pd.DataFrame(res_dataset, columns=['Sam1', 'Sam2', 'Diff_Num', 'Similar_Rate'])
-        base_class.append_write_csv_by_df(res_df, output_path, 'wghca_compare_result')
+        base_class.append_write_csv_by_df(res_df, output_path, 'wghca_compare_result_{}'.format(timestamp))
     
     else:
         raise RuntimeError('Both matrices should have the same number of columns')

@@ -11,7 +11,9 @@ setup(
     ],
     entry_points={
         'console_scripts': [
-            'htp=scripts.index:cli',
+            'htp-hca=scripts.hca_cli:cli',
+            'htp-wghca=scripts.wghca_cli:cli',
+            'htp-snp2htp=scripts.snp2htp_cli:cli',
         ],
     },
 )
