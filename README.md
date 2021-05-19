@@ -3,7 +3,7 @@
 
 ## Dependance
 
-This project was developed based on python3. If your operating system does not have Python3 environment installed, Please install the [Python3](https://www.python.org/downloads/) first.
+This project was based on python3 environment. If your operating system does not have Python3 environment installed, Please install the [Python3](https://www.python.org/downloads/) first.
 
 ## Quickstart
 
