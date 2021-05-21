@@ -11,10 +11,10 @@ def similar_rate(list1, list2):
     common_num = 0
     missing_num = 0
     for i in range(len(list1)):
-        if list1[i] == list2[i]:
-            common_num+=1
-        if list1[i] == missing_str or list2[i] == missing_str:
-            missing_num += 1
+        if missing_str in [list1[i], list2[i]]:
+            missing_num+=1
+        elif list1[i] == list2[i]:
+            common_num += 1
 
     if (len(list1)-missing_num) == 0:
         return [0, 0]

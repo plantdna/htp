@@ -33,7 +33,7 @@ class BaseClass:
         try:
             file_path='{}/{}.csv'.format(dir_path, file_name)
             if os.path.exists(dir_path):
-                if os.path.exists():
+                if os.path.exists(file_path):
                     with open(file_path, 'a+',encoding='utf-8') as f:
                         f.write('{}\n'.format(','.join([str(val) for val in row])))
                         f.close()
