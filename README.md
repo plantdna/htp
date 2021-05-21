@@ -67,12 +67,13 @@ Please type input file path: /home/plantdna/htp/dataset/hca_template.csv
 Please type contrast file path [/]: /home/plantdna/htp/dataset/hca_template.csv
 Please type output dir path [/home/plantdna/htp/output]: 
 Please type missing string [---]: 
+Please type number of process [1]: 
 ```
 
 - mode two
 
 ```bash
-htp-hca -i /home/plantdna/htp/dataset/hca_template.csv -c /home/plantdna/htp/dataset/hca_template.csv -o /home/plantdna/htp/output -ms ---
+htp-hca -i /home/plantdna/htp/dataset/hca_template.csv -c /home/plantdna/htp/dataset/hca_template.csv -o /home/plantdna/htp/output -ms --- -p 1
 ```
 **Input file**
 
@@ -100,12 +101,13 @@ Please type contrast file path [/]: /home/plantdna/htp/dataset/wghca_template.cs
 Please type output dir path [/home/plantdna/htp/output]: 
 Please type similarity threshold [0.8]: 
 Please type missing string [---]: 
+Please type number of process [1]: 
 ```
 
 - mode two
 
 ```bash
-htp-wghca -i /home/plantdna/htp/dataset/wghca_template.csv -o /home/plantdna/htp/output -c /home/plantdna/htp/dataset/wghca_template.csv -st 0.8 -ms ---
+htp-wghca -i /home/plantdna/htp/dataset/wghca_template.csv -o /home/plantdna/htp/output -c /home/plantdna/htp/dataset/wghca_template.csv -st 0.8 -ms --- -p 2
 ```
 
 **Input file**

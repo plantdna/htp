@@ -1,6 +1,7 @@
 import click
 import os
 import traceback
+from multiprocessing import cpu_count
 
 from scripts.wghca.index import wghca
 
@@ -13,15 +14,18 @@ ROOT_DIR = '/'.join(os.path.abspath(os.path.dirname(__file__)).split('/')[:-1])
 @click.option('-o', '--output', 'output_dir', help="output dir path.", prompt='Please type output dir path', type=click.Path(exists=True), default='{}/output'.format(ROOT_DIR), show_default=True)
 @click.option('-ms', '--missing_string', 'ms', help="missing string.", prompt='Please type missing string', default='---', show_default=True, type=click.STRING)
 @click.option('-st', '--similarity_threshold', 'st', help="similarity threshold.", prompt='Please type similarity threshold', default=0.8, show_default=True, type=click.FLOAT)
+@click.option('-p', '--process', 'process', help="cup core number.", prompt='Please type number of process', default=1, show_default=True, type=click.IntRange(1, cpu_count(), clamp=True))
 
-def cli(input_path, contrast_path, output_dir, ms, st):
+
+def cli(input_path, contrast_path, output_dir, ms, st, process):
     try:
         wghca({
             'compare_file_path': input_path,
             'contrast_file_path': contrast_path,
             'ms': ms,
             'st': st,
-            'output_path': output_dir
+            'output_path': output_dir,
+            'process': process,
         })
     except Exception as e:
         traceback.print_exc()
