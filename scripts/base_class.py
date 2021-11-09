@@ -1,5 +1,4 @@
-import os
-import traceback    # traceback.format_exc() return error string
+import traceback
 import os
 
 class BaseClass:

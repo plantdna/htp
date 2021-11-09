@@ -39,7 +39,7 @@ def split_genotyping_file_by_chr(params):
             try:
                 chunk = file_reader.get_chunk(100)
                 if len(validate_cols) == 0:
-                    sample_names = chunk.columns.values.tolist()[1:-45]
+                    sample_names = [code for code in chunk.columns.tolist() if 'call_code' in code]
                     validate_cols = ['probeset_id', 'Start', 'Chr_id', 'markertype'] + sample_names
 
                 filter_chunk = chunk[validate_cols].copy()
