@@ -15,6 +15,7 @@ setup(
             'htp-wghca=scripts.wghca_cli:cli',
             'htp-snp2htp=scripts.snp2htp_cli:cli',
             'htp-abss=scripts.abss_cli:cli',
+            'htp-hpb=scripts.hpb_cli:cli',
         ],
     },
 )
