@@ -117,7 +117,7 @@ def fitting(chr_dir, rp_codes, dp_codes, probeset_info_df, is_filter_marker, tra
         
         # 绘制全部标记
         axs[axs_x, axs_y].scatter(
-            np.array([probeset_info_df.loc[key]['Position'] for key in list(snp_rates['chr{}'.format(chr_id)])]),
+            np.array([probeset_info_df.loc[key]['position'] for key in list(snp_rates['chr{}'.format(chr_id)])]),
             [item['rp_rate'] for item in list(snp_rates['chr{}'.format(chr_id)].values())],
             zorder=0,
             color='gray'
@@ -127,7 +127,7 @@ def fitting(chr_dir, rp_codes, dp_codes, probeset_info_df, is_filter_marker, tra
             # 过滤异常值标记
             s1data = filter_snp(snp_rates['chr{}'.format(chr_id)])
             s1_probesets = list(s1data.keys())
-            xdata = np.array([probeset_info_df.loc[key]['Position'] for key in s1_probesets])
+            xdata = np.array([probeset_info_df.loc[key]['position'] for key in s1_probesets])
             ydata = np.array(list(s1data.values()))
             # 拟合曲线
             z_fit = np.polyfit(xdata, ydata, 3)
@@ -156,7 +156,7 @@ def fitting(chr_dir, rp_codes, dp_codes, probeset_info_df, is_filter_marker, tra
             axs[axs_x, axs_y].plot(xdata, y2_list, color='red', zorder=2)
             # 绘制选中标记
             axs[axs_x, axs_y].scatter(
-                np.array([probeset_info_df.loc[key]['Position'] for key in list(s2data.keys())]),
+                np.array([probeset_info_df.loc[key]['position'] for key in list(s2data.keys())]),
                 list(s2data.values()),
                 zorder=1,
             )

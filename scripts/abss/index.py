@@ -41,8 +41,8 @@ def main(params):
 
         # load dataset
         print('加载标记信息')
-        probeset_info_df = pd.read_csv('../../dataset/probeset_info.csv', low_memory=False)
-        probeset_info_df.set_index('Marker', inplace=True)
+        probeset_info_df = pd.read_csv('../../dataset/marker_info.csv', low_memory=False)
+        probeset_info_df.set_index('probeset_id', inplace=True)
         # load sample info excel
         print('加载样品信息表')
         sample_info_df = pd.read_excel(params['sample_file_path'])
