@@ -1,4 +1,5 @@
 # HTP
+[Website](https://htp.plantdna.site/)
 > Haplotype-tag polymorphisms (HTP) is a high-resolution, high-efficient, and low-cost molecular marker which can serve as a low cost, time, and high-throughput genotyping resources for genetic mapping, germplasm resource analysis and genomics-informed breeding in maize. 
 
 ## Dependance
@@ -118,3 +119,10 @@ htp-wghca -i /home/plantdna/htp/dataset/wghca_template.csv -o /home/plantdna/htp
 **Output file**
 
 > /home/plantdna/htp/output/wghca_compare_result_{$timestamp}.csv
+
+
+### HPB 
+> heterotic pattern building
+
+### HPP
+# Accurate Background Selection Strategy
