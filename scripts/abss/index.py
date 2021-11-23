@@ -14,7 +14,7 @@ from utils.final_result import final_result
 from utils.draw_image import draw_group
 
 
-def main(params):
+def abss(params):
     '''
     回交转育群体的背景回复分析
     '''
@@ -121,4 +121,4 @@ def main(params):
 
 
 if __name__ == '__main__':
-    main(params)
+    abss(params)

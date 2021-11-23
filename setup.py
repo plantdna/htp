@@ -17,6 +17,8 @@ setup(
             'htp-abss=scripts.abss_cli:cli',
             'htp-hpb=scripts.hpb_cli:cli',
             'htp-hpp=scripts.hpp_cli:cli',
+            'htp-hlp=scripts.hlp_cli:cli',
+            'htp-ilpa=scripts.ilpa_cli:cli',
         ],
     },
 )

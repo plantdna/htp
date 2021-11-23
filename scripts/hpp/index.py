@@ -57,7 +57,7 @@ def compare(hybrid_df, output_path, group_dataset_path):
     }
 
 
-def main(params):
+def hpp(params):
     try:
         hybrid_file_path = params['input_path']
         group_dataset_path = params['group_dataset_dir']
@@ -88,4 +88,4 @@ def main(params):
 
 
 if __name__ == '__main__':
-    main(params)
+    hpp(params)

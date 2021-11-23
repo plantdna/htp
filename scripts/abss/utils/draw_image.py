@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 from matplotlib.colors import LinearSegmentedColormap
 
 # 0: 白 1: 绿 2 黄 3 红 4 灰
-color_list = ['white', 'green','orange','red', 'gray']
+color_list = ['white', 'red','orange','gray']
 
 def draw_group(chr_path, output_path):
     if not os.path.exists(output_path):
@@ -20,6 +20,9 @@ def draw_group(chr_path, output_path):
         data_set = np.unique(heatmap_data)
         for i in data_set:
             clist.append(color_list[i])
+
+        if len(clist) == 1:
+            clist.append([c for c in color_list if c not in clist][0])
 
         newcmp = LinearSegmentedColormap.from_list('chaos',clist)
         ax.imshow(heatmap_data, cmap=newcmp, interpolation=None)
@@ -58,6 +61,9 @@ def draw_sample(chr_path, output_path):
         data_set = np.unique(heatmap_data)
         for i in data_set:
             clist.append(color_list[i])
+
+        if len(clist) == 1:
+            clist.append([c for c in color_list if c not in clist][0])
 
         newcmp = LinearSegmentedColormap.from_list('chaos',clist)
 
