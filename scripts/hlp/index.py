@@ -36,9 +36,10 @@ def get_similary(str1, str2):
 
 def hlp(params):
     htp_code = params['htp_code']
+    ROOT_DIR = params['ROOT_DIR']
     sequence = params['sequence'].upper()
 
-    block_df = pd.read_csv('../dataset/haplotype_database.csv')
+    block_df = pd.read_csv('{}/dataset/haplotype_database.csv'.format(ROOT_DIR))
     target_df = block_df[block_df['HTP ID'] == htp_code].copy()
     if len(target_df) == 0:
         print('htp code error')
@@ -47,7 +48,7 @@ def hlp(params):
         target_df['similary'] = target_df.apply(lambda x: get_similary(x['test_sequence'], x['Haplotype Sequence']), axis=1)
         target_df['bayes'] = target_df.apply(lambda x: getNBayes(x['Frequency']), axis=1)
         target_df.sort_values(by=['similary', 'bayes'], ascending=[False, False], inplace=True)
-        return target_df.head(1)['Haplotype Sequence'].tolist()[0]
+        print(target_df.head(1)['Haplotype Sequence'].tolist()[0])
 
 
 if __name__ == '__main__':

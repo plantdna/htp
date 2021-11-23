@@ -19,6 +19,7 @@ setup(
             'htp-hpp=scripts.hpp_cli:cli',
             'htp-hlp=scripts.hlp_cli:cli',
             'htp-ilpa=scripts.ilpa_cli:cli',
+            'htp-score=scripts.score_cli:cli',
         ],
     },
 )

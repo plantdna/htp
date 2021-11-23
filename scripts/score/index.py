@@ -1,22 +1,58 @@
 import pandas as pd
+import numpy as np
+import os
 
-'''
-构建单体型列表
-'''
-htp_block_df = pd.read_csv('../files/htp/bin_blocks_2021-08-01.csv')
-htp_block_df.drop(['Sequence','Rate'], inplace=True, axis=1)
-group_names = [name.split('.')[0] for name in os.listdir('../files/htp/zayou_2021-09-25') if name[0] != '.']
-for name in group_names:
-    htp_block_df[name] = 0
+def get_score(genotyoe, collection):
+    alleles = [int(v) for v in genotyoe.split('/') if v != 0] if '/' in genotyoe else []
+    score = 0
+    if len(alleles) > 0:
+        for allele in alleles:
+            if allele in collection:
+                score+=0.5
+    return score
+    
 
-htp_block_df.set_index(['Index', 'HTP ID'], inplace=True)
+def score(params):
+    groups_path = params['groups_path']
+    output_path = params['output_path']
 
-for group_name in group_names:
-    group_df = pd.read_csv('../files/htp/zayou_2021-09-25/{}.csv'.format(group_name))
-    cols = group_df.columns.tolist()[1:]
-    for col in cols:
-        htp_id = 'HTP_{}'.format(col.split('Bin')[1])
-        col_values = [v for v in list(set(group_df[col].tolist())) if v != 0]
-        if len(col_values) > 0:
-            for v in col_values:
-                htp_block_df.at[(v, htp_id), group_name] = 1           
+    groups_names = [name for name in os.listdir(groups_path) if (name[0] != '.' and name[-4:] == '.csv' and name != 'group_blocks.csv')]
+
+    block_df = pd.read_csv('{}/group_blocks.csv'.format(groups_path))
+
+    for filename in groups_names:
+        group_df = pd.read_csv('{}/{}'.format(groups_path, filename))        
+        groups = filename[:-4].split('_hpb_')
+        if groups[0] != groups[1]:
+            select_df = block_df[
+                ((block_df[groups[0]]==1) & (block_df[groups[1]]==1) & (block_df['sum']==2)) | ((block_df[groups[0]]==1) & (block_df['sum']==1)) |((block_df[groups[1]]==1) & (block_df['sum']==1))
+            ].copy()
+        else:
+            select_df = block_df[
+                (block_df[groups[0]]==1) & (block_df['sum']==1)
+            ].copy()
+        
+        select_htps = select_df['HTP ID'].tolist()
+        select_htp_index_map = {}
+        for htp in select_htps:
+            select_htp_index_map[htp] = select_df[select_df['HTP ID'] == htp]['Haplotype Index'].tolist()
+
+        new_df = group_df[['call_code']+select_htps].copy()    
+
+        sample_score = []
+
+        for index, row in new_df.iterrows():
+            score = 0
+            for key, value in select_htp_index_map.items():
+                score+=get_score(row[key], value)
+
+            sample_score.append([row['call_code'], round(score/len(select_htp_index_map), 8)])
+
+        sample_score_df = pd.DataFrame(sample_score, columns=['call_code', 'score'])
+        sample_score_df.to_csv('{}/{}_score.csv'.format(output_path, filename[:-4]), index=False, encoding='utf-8_sig')
+
+        print('score is:', np.mean(sample_score_df['score'])+3*np.std(sample_score_df['score']))
+
+
+if __name__ == '__main__':
+    score(params)

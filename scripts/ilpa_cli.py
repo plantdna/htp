@@ -13,6 +13,9 @@ ROOT_DIR = '/'.join(os.path.abspath(os.path.dirname(__file__)).split('/')[:-1])
 
 def cli(input_path, output_path):
     try:
+        if not os.path.exists(output_path):
+            os.makedirs(output_path)
+
         ilpa({
             'input_path': input_path,
             'output_path': output_path

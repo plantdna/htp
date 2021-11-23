@@ -14,6 +14,9 @@ ROOT_DIR = '/'.join(os.path.abspath(os.path.dirname(__file__)).split('/')[:-1])
 
 def cli(input_path, group_dataset_dir, output_path):
     try:
+        if not os.path.exists(output_path):
+            os.makedirs(output_path)
+
         hpp({
             'input_path': input_path,
             'group_dataset_dir': group_dataset_dir,
