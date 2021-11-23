@@ -30,7 +30,7 @@ def hpb(params):
     # 统计每个群的单体型情况
     htp_block_df = pd.read_csv('{}/dataset/haplotype_database.csv'.format(ROOT_DIR))
     htp_block_df = htp_block_df[['Haplotype Index','Chr','HTP ID']].copy()
-    group_names = [name for name in os.listdir(zayou_raw_path) if name[-4:] != '.csv']
+    group_names = [name for name in os.listdir(zayou_raw_path) if name[-4:] == '.csv']
     for name in group_names:
         htp_block_df[name] = 0
 
