@@ -9,7 +9,7 @@ ROOT_DIR = '/'.join(os.path.abspath(os.path.dirname(__file__)).split('/')[:-1])
 
 @click.command(context_settings=CONTEXT_SETTINGS)
 @click.option('-i', '--input', 'groups_path', help="group group data files dir.", prompt='Please type input group files dir', type=click.Path(exists=True))
-@click.option('-o', '--output', 'output_path', help="output file path.", prompt='Please type output file path', type=click.Path(exists=False))
+@click.option('-o', '--output', 'output_path', help="output path.", prompt='Please type output file path', type=click.Path(exists=False))
 
 def cli(groups_path, output_path):
     try:

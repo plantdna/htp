@@ -4,14 +4,14 @@ import traceback
 import os
 import pandas as pd
 
-from utils.groupby_chr import groupby_chr
-from utils.fitting import fitting
-from utils.generate_dataset import generate_dataset
-from utils.compare import compare
-from utils.denoise import denoise
-from utils.to_htp import to_htp
-from utils.final_result import final_result
-from utils.draw_image import draw_group
+from scripts.abss.utils.groupby_chr import groupby_chr
+from scripts.abss.utils.fitting import fitting
+from scripts.abss.utils.generate_dataset import generate_dataset
+from scripts.abss.utils.compare import compare
+from scripts.abss.utils.denoise import denoise
+from scripts.abss.utils.to_htp import to_htp
+from scripts.abss.utils.final_result import final_result
+from scripts.abss.utils.draw_image import draw_group
 
 
 def abss(params):
@@ -41,7 +41,7 @@ def abss(params):
 
         # load dataset
         print('加载标记信息')
-        probeset_info_df = pd.read_csv('../../dataset/marker_info.csv', low_memory=False)
+        probeset_info_df = pd.read_csv('{}/dataset/marker_info.csv'.format(params['ROOT_DIR']), low_memory=False)
         probeset_info_df.set_index('probeset_id', inplace=True)
         # load sample info excel
         print('加载样品信息表')

@@ -17,7 +17,8 @@ def cli(genotype_files_dir, sample_file_path, output_path):
         abss({
             'genotype_files_dir': genotype_files_dir, 
             'sample_file_path': sample_file_path, 
-            'output_path': output_path
+            'output_path': output_path,
+            'ROOT_DIR': ROOT_DIR,
         })
     except Exception as e:
         traceback.print_exc()

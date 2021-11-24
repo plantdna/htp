@@ -17,10 +17,11 @@ python3 -m venv venv
 
 source ./venv/bin/activate
 
-pip3 install -r requirements.txt
+pip install -r requirements.txt
 
-pip3 install --editable .
+pip install --editable .
 ```
+---
 
 ### SNP2HTP
 
@@ -51,6 +52,7 @@ htp-snp2htp -i /home/plantdna/htp/dataset/template_genotyping.txt -o /home/plant
 **Output file**
 
 > /home/plantdna/htp/output/{$genotyping_file_name}_{$timestamp}/all_htps.csv
+---
 
 ### HCA
 
@@ -85,6 +87,7 @@ htp-hca -i /home/plantdna/htp/dataset/hca_template.csv -c /home/plantdna/htp/dat
 
 > /home/plantdna/htp/output/hca_compare_result_{$timestamp}.csv
 
+---
 
 ### WGHCA
 
@@ -119,13 +122,74 @@ htp-wghca -i /home/plantdna/htp/dataset/wghca_template.csv -o /home/plantdna/htp
 **Output file**
 
 > /home/plantdna/htp/output/wghca_compare_result_{$timestamp}.csv
+---
 
 
 ### HPB 
-> heterotic pattern building
+
+**Description**
+> Heterotic Pattern Building
+
+```bash
+(venv) (base) root:~/work/plantdna/htp$ htp-hpb
+Please type input genotype files dir: ./
+Please type output path: ./
+```
+---
+
+### score
+
+```bash
+(venv) (base) root:~/work/plantdna/htp$ htp-score
+Please type input group files dir: ./
+Please type output path: ./
+```
+---
 
 ### HPP
+
+**Description**
+> Heterotic Pattern Prediction
+
+```bash
+(venv) (base) root:~/work/plantdna/htp$ htp-hpp
+Please type hybrid file path: ./
+Please type group dataset dir: ./
+Please type output path: ./
+```
+---
+
+### ILPA
+
+**Description**
+> Inbred Line Pedigree Analysis
+
+```bash
+(venv) (base) root:~/work/plantdna/htp$ htp-ilpa
+Please type input genotype files dir: ./
+Please type output path: ./
+```
+---
+
+### HLP
+
+**Description**
 >
+
+```bash
+(venv) (base) root:~/work/plantdna/htp$ htp-hlp
+Please type input your sequence: A-T-A---A
+Please type HTP code: HTP_0001
+```
+---
+
 
 ### ABSS
 > Accurate Background Selection Strategy
+
+```bash
+(venv) (base) root:~/work/plantdna/htp$ htp-abss
+Please type input genotype files dir: ./
+Please type input sample file path: ./
+Please type output file path: ./
+```
