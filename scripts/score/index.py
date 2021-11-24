@@ -32,7 +32,7 @@ def score(params):
                 (block_df[groups[0]]==1) & (block_df['sum']==1)
             ].copy()
         
-        select_htps = select_df['HTP ID'].tolist()
+        select_htps = list(set(select_df['HTP ID'].tolist()))
         select_htp_index_map = {}
         for htp in select_htps:
             select_htp_index_map[htp] = select_df[select_df['HTP ID'] == htp]['Haplotype Index'].tolist()

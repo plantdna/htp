@@ -51,7 +51,7 @@ def hpb(params):
             col_values = [v for v in list(set(group_df[col].tolist())) if v != 0]
             if len(col_values) > 0:
                 for v in col_values:
-                    htp_block_df.at['{}_{}'.format(v, col), group_name] = 1   
+                    htp_block_df.at['{}_{}'.format(v, col), group_name[:-4]] = 1   
     
     htp_block_df['sum'] = htp_block_df.apply(lambda x: sum(x.values[3:]), axis=1)
     htp_block_df.to_csv('{}/group_blocks.csv'.format(output_path), index=False, encoding='utf-8_sig')
@@ -63,7 +63,7 @@ def hpb(params):
     for i in range(len(file_names)):
         file_a_df = pd.read_csv('{}/{}'.format(zayou_raw_path, file_names[i]))
         name_a = file_names[i].split('.')[0]
-        for j in range(i+1, len(file_names)):
+        for j in range(i, len(file_names)):
             file_b_df = pd.read_csv('{}/{}'.format(zayou_raw_path, file_names[j]))
             name_b = file_names[j].split('.')[0]
             print(name_a, name_b)
