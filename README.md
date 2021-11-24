@@ -21,6 +21,8 @@ pip install -r requirements.txt
 
 pip install --editable .
 ```
+
+## Data comparison
 ---
 
 ### SNP2HTP
@@ -52,7 +54,6 @@ htp-snp2htp -i /home/plantdna/htp/dataset/template_genotyping.txt -o /home/plant
 **Output file**
 
 > /home/plantdna/htp/output/{$genotyping_file_name}_{$timestamp}/all_htps.csv
----
 
 ### HCA
 
@@ -87,8 +88,6 @@ htp-hca -i /home/plantdna/htp/dataset/hca_template.csv -c /home/plantdna/htp/dat
 
 > /home/plantdna/htp/output/hca_compare_result_{$timestamp}.csv
 
----
-
 ### WGHCA
 
 **Description**
@@ -122,8 +121,9 @@ htp-wghca -i /home/plantdna/htp/dataset/wghca_template.csv -o /home/plantdna/htp
 **Output file**
 
 > /home/plantdna/htp/output/wghca_compare_result_{$timestamp}.csv
----
 
+##  Data prediction
+---
 
 ### HPB 
 
@@ -135,16 +135,14 @@ htp-wghca -i /home/plantdna/htp/dataset/wghca_template.csv -o /home/plantdna/htp
 Please type input genotype files dir: ./
 Please type output path: ./
 ```
----
 
-### score
+### Score
 
 ```bash
 (venv) (base) root:~/work/plantdna/htp$ htp-score
 Please type input group files dir: ./
 Please type output path: ./
 ```
----
 
 ### HPP
 
@@ -157,7 +155,6 @@ Please type hybrid file path: ./
 Please type group dataset dir: ./
 Please type output path: ./
 ```
----
 
 ### ILPA
 
@@ -169,21 +166,20 @@ Please type output path: ./
 Please type input genotype files dir: ./
 Please type output path: ./
 ```
----
 
 ### HLP
 
 **Description**
->
+> HTP Loci Predicting
 
 ```bash
 (venv) (base) root:~/work/plantdna/htp$ htp-hlp
 Please type input your sequence: A-T-A---A
 Please type HTP code: HTP_0001
 ```
+
+## Population analysis
 ---
-
-
 ### ABSS
 > Accurate Background Selection Strategy
 
