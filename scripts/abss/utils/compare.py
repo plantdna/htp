@@ -13,7 +13,7 @@ def compare_genotype(mother, children):
     群体: AA 受体: BB 结果: 3
     '''
     if not pd.isna(children) and len(children)>=2:
-        if children in ['NoCall', '---']:
+        if children in ['NoCall', '---', '']:
             return 0
         else:
             mother_allele = mother.split('/')

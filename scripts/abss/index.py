@@ -39,6 +39,9 @@ def abss(params):
         if os.path.exists(output_path):
             os.system('rm -rf {}'.format(output_path))
 
+        if not os.path.exists(images_dir):
+            os.makedirs(images_dir)
+
         # load dataset
         print('加载标记信息')
         probeset_info_df = pd.read_csv('{}/dataset/marker_info.csv'.format(params['ROOT_DIR']), low_memory=False)
@@ -50,7 +53,7 @@ def abss(params):
         dp_call_codes = sample_info_df[sample_info_df['order'] == 1]['call_code'].tolist()
 
         print('拆分合并基因型文件')
-        groupby_chr(genotyping_files_dir, board_dir, 5, chr_dir)
+        groupby_chr(genotyping_files_dir, board_dir, 5, chr_dir, probeset_info_df)
         
         # 拟合供体数据，筛选跟踪标记
         print('拟合数据，确定跟踪标记')
@@ -61,7 +64,7 @@ def abss(params):
             probeset_info_df,
             True,
             tracke_probeset_file_path,
-            '{}/select_snp'.format(images_dir)
+            images_dir
         )
 
         # 构建数据子集

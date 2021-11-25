@@ -1,12 +1,13 @@
 
-# 根据上一步的比对结果,从结果文件中根据离群值取出符合条件的Bin.
 import pandas as pd
 import numpy as np
+import time
+
 
 def continue_finder(start, compare_df, lens):
     for i in range(start, lens):
-        if compare_df.loc[i]['parent'] == []:
-            return continue_finder(i+1)
+        if compare_df.loc[i]['parent'] == '':
+            return continue_finder(i+1, compare_df, lens)
         else:
             return i
 
@@ -48,16 +49,19 @@ def ilpa(params):
             box_lens.append(next_i-i)
             i = next_i
 
-    percentile = np.percentile(box_lens, (25,75))
-    iqr = percentile[1]-percentile[0]
-    up_limit = percentile[1]+1.5*iqr
-    target_bins = []
-    for i in range(len(box_lens)):
-        if box_lens[i] >= up_limit:
-            target_bins+=boxs[i]
+    if len(box_lens) == 0:
+        print('Not find inbredX')
+    else:
+        percentile = np.percentile(box_lens, (25,75))
+        iqr = percentile[1]-percentile[0]
+        up_limit = percentile[1]+1.5*iqr
+        target_bins = []
+        for i in range(len(box_lens)):
+            if box_lens[i] >= up_limit:
+                target_bins+=boxs[i]
 
-    inbredX_df = file_df.iloc[:1][[first_col]+target_bins]
-    inbredX_df.to_csv('{}/inbredX.csv'.format(output_path), index=False, encoding='utf-8_sig')
+        inbredX_df = file_df.iloc[:1][[first_col]+target_bins]
+        inbredX_df.to_csv('{}/inbredX_{}.csv'.format(output_path, int(round(time.time() * 1000))), index=False, encoding='utf-8_sig')
 
 
 if __name__ == '__main__':

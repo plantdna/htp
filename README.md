@@ -67,22 +67,22 @@ htp-snp2htp -i /home/plantdna/htp/dataset/template_genotyping.txt -o /home/plant
 
 ```bash
 (venv) (base) root:~/home/plantdna/htp$ htp-hca
-Please type input file path: /home/plantdna/htp/dataset/hca_template.csv
-Please type contrast file path [/]: /home/plantdna/htp/dataset/hca_template.csv
-Please type output dir path [/home/plantdna/htp/output]: 
-Please type missing string [---]: 
-Please type number of process [1]: 
+Please type input file path: /home/plantdna/htp/dataset/Data-comparison-Hybrid-1-compared-sample.csv
+Please type contrast file path: /home/plantdna/htp/dataset/Data-comparison-Hybrids-200-referenced-samples.csv
+Please type output dir path [/home/plantdna/htp/output]:
+Please type missing string [---]:
+Please type number of process [1]: 3
 ```
 
 - mode two
 
 ```bash
-htp-hca -i /home/plantdna/htp/dataset/hca_template.csv -c /home/plantdna/htp/dataset/hca_template.csv -o /home/plantdna/htp/output -ms --- -p 1
+htp-hca -i /home/plantdna/htp/dataset/Data-comparison-Hybrid-1-compared-sample.csv -c /home/plantdna/htp/dataset/Data-comparison-Hybrids-200-referenced-samples.csv -o /home/plantdna/htp/output -ms --- -p 3
 ```
 **Input file**
 
-- compare file path: /home/plantdna/htp/dataset/hca_template.csv
-- contrast file path: /home/plantdna/htp/dataset/hca_template.csv
+- compare file path: /home/plantdna/htp/dataset/Data-comparison-Hybrid-1-compared-sample.csv
+- contrast file path: /home/plantdna/htp/dataset/Data-comparison-Hybrids-200-referenced-samples.csv
 
 **Output file**
 
@@ -163,8 +163,8 @@ Please type output path: ./
 
 ```bash
 (venv) (base) root:~/work/plantdna/htp$ htp-ilpa
-Please type input genotype files dir: ./
-Please type output path: ./
+Please type input genotype files dir: /home/plantdna/htp/dataset/Jing2416-inbredX.csv
+Please type output file path [/home/plantdna/htp/output]:
 ```
 
 ### HLP

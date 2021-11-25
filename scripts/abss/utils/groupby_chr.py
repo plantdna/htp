@@ -2,7 +2,7 @@ import os
 from .base import split_genotype_file, merge_chrs
 
 
-def groupby_chr(genotyping_files_dir:str, board_dir:str, skiprows:int, chr_dir:str) -> None:
+def groupby_chr(genotyping_files_dir:str, board_dir:str, skiprows:int, chr_dir:str, probeset_info_df) -> None:
     '''
     按染色体拆分下机数据文件, 并合并到数据集
     '''
@@ -17,7 +17,8 @@ def groupby_chr(genotyping_files_dir:str, board_dir:str, skiprows:int, chr_dir:s
         split_genotype_file(
             genotyping_file_path,
             '{}/{}'.format(board_dir, filename.split('.')[0]),
-            skiprows
+            skiprows, 
+            probeset_info_df
         )
 
         merge_chrs('{}/{}'.format(board_dir, filename.split('.')[0]), chr_dir)

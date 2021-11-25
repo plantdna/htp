@@ -45,7 +45,7 @@ def append_write_csv_by_df(df, dir_path:str, file_name:str):
         traceback.format_exc(e)
 
 
-def split_genotype_file(file_path:str, output_dir:str, skiprows:int):
+def split_genotype_file(file_path:str, output_dir:str, skiprows:int, probeset_info_df):
     '''
     分片读取genotyping文件，并按染色体分组存储
     '''
@@ -61,6 +61,7 @@ def split_genotype_file(file_path:str, output_dir:str, skiprows:int):
                     validate_sams = ['probeset_id', 'Chr_id', 'Start']+[col for col in chunk.columns.values.tolist() if 'call_code' in col]
                 
                 filter_df = chunk[validate_sams].copy()
+                filter_df = filter_df[filter_df['probeset_id'].isin(probeset_info_df.index)].copy()
                 filter_df_groups = filter_df.groupby(by="Chr_id")
                 group_keys = list(filter_df_groups.groups.keys())
                 for group in group_keys:

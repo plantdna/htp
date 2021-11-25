@@ -10,7 +10,7 @@ ROOT_DIR = '/'.join(os.path.abspath(os.path.dirname(__file__)).split('/')[:-1])
 @click.command(context_settings=CONTEXT_SETTINGS)
 @click.option('-t', '--genotype', 'genotype_files_dir', help="genotype files dir.", prompt='Please type input genotype files dir', type=click.Path(exists=True))
 @click.option('-s', '--sample', 'sample_file_path', help="sample file path.", prompt='Please type input sample file path', type=click.Path(exists=True))
-@click.option('-o', '--output', 'output_path', help="output file path.", prompt='Please type output file path', type=click.Path(exists=True))
+@click.option('-o', '--output', 'output_path', help="output file path.", prompt='Please type output file path', type=click.Path(exists=False))
 
 def cli(genotype_files_dir, sample_file_path, output_path):
     try:

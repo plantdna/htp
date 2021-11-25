@@ -63,7 +63,7 @@ def fitting(chr_dir, rp_codes, dp_codes, probeset_info_df, is_filter_marker, tra
         }
 
         chr_df = pd.read_csv('{}/chr{}.csv'.format(chr_dir, chr_id))
-        chr_probesets = chr_df.columns.tolist()[1:]
+        chr_probesets = [id for id in chr_df.columns.tolist()[1:] if id in probeset_info_df.index]
         chr_group_df = chr_df[~chr_df['call_code'].isin(rp_codes+dp_codes)]
         chr_rp_df = chr_df[chr_df['call_code'].isin(rp_codes)]
         target_probeset['chr{}'.format(chr_id)] = chr_probesets
