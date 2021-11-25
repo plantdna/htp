@@ -131,3 +131,6 @@ output/
 
 # Pyre type checker
 .pyre/
+
+*.zip
+htp-template-files

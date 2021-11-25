@@ -22,6 +22,9 @@ pip install -r requirements.txt
 pip install --editable .
 ```
 
+## Dataset Download
+[⏬ download](https://htp.plantdna.site/download/htp-template-files.zip)
+
 ## Data comparison
 ---
 
