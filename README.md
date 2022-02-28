@@ -82,7 +82,7 @@ Since the paper has not been published yet, only part of the haplotype_database.
   - [htp-hpp](https://github.com/plantdna/htp#hpp)
   - [htp-ilpa](https://github.com/plantdna/htp#ilpa)
   - [htp-hlp](https://github.com/plantdna/htp#hlp)
-- Population analysis
+- Group analysis
   - [abss](https://github.com/plantdna/htp#abss)
 
 ## Data comparison
@@ -314,7 +314,9 @@ Please type input your sequence: A-T-A---A
 Please type HTP code: HTP_0001
 ```
 
-## Population analysis
+## Group analysis
+
+When the analyzed data is available, use BCPlot to drawing images to visualize background information on the backcross population
 
 ---
 
