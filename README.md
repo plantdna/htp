@@ -316,7 +316,7 @@ Please type HTP code: HTP_0001
 
 ## Group analysis
 
-When the analyzed data is available, use BCPlot to drawing images to visualize background information on the backcross population
+When the analyzed data is available, use BCPlot to drawing images to visualize background information on the backcross group
 
 ---
 
