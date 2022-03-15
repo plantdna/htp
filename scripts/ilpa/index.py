@@ -1,15 +1,48 @@
 
+from os import PRIO_USER
 import pandas as pd
 import numpy as np
 import time
 
+lcfs = []
 
-def continue_finder(start, compare_df, lens):
-    for i in range(start, lens):
-        if compare_df.loc[i]['parent'] == '':
-            return continue_finder(i+1, compare_df, lens)
+def format_parent(df):
+    new_df = df.copy()
+    new_df['smooth'] = ''
+    for index, row in df.iterrows():
+        if not row['parent']:
+            new_df.at[index, 'smooth'] = 'x'
         else:
-            return i
+            parents = row['parent'].split(',')
+            if len(parents) == 1:
+                pass
+            else:
+                new_df.at[index, 'smooth'] = 'x'
+
+    return new_df
+
+
+def findLCF(df):
+    '''
+    找出lcf
+    :return:
+    '''
+    blockIndex = None
+    for index, row in df.iterrows():
+        if row['smooth'] != 'x':
+            if index+1 < len(df):
+                if df.iloc[index+1]['smooth'] != 'x':
+                    blockIndex = index
+                    blockDf = df.iloc[:index]
+                    lcfs.append(blockDf[blockDf['smooth']=='x']['col'].tolist())
+                    newDf = df.iloc[index+2:].copy()
+                    newDf.reset_index(inplace=True)
+                    newDf.drop('index', axis=1, inplace=True)
+                    return findLCF(newDf)
+                    break
+    if not blockIndex:
+        lcfs.append(df[df['smooth'] == 'x']['col'].tolist())
+    
 
 
 def find_parent(col, df):
@@ -35,33 +68,15 @@ def ilpa(params):
 
     compare_df = pd.DataFrame({'col': columns[1:]})
     compare_df['parent'] = compare_df.apply(lambda x: find_parent(x['col'], file_df[[first_col, x['col']]]), axis=1)
-
-    cols = columns[1:]
-    # 统计X
-    boxs = []
-    box_lens = []
-    lens = len(compare_df)
-
-    for i in range(lens):
-        next_i = continue_finder(i, compare_df, lens)
-        if next_i != i:
-            boxs.append(cols[i:next_i])
-            box_lens.append(next_i-i)
-            i = next_i
-
-    if len(box_lens) == 0:
-        print('Not find inbredX')
-    else:
-        percentile = np.percentile(box_lens, (25,75))
-        iqr = percentile[1]-percentile[0]
-        up_limit = percentile[1]+1.5*iqr
-        target_bins = []
-        for i in range(len(box_lens)):
-            if box_lens[i] >= up_limit:
-                target_bins+=boxs[i]
-
-        inbredX_df = file_df.iloc[:1][[first_col]+target_bins]
-        inbredX_df.to_csv('{}/inbredX_{}.csv'.format(output_path, int(round(time.time() * 1000))), index=False, encoding='utf-8_sig')
+    
+    f_df = format_parent(compare_df)
+    findLCF(f_df)
+    lcf_lens = [len(lcf) for lcf in lcfs]
+    max_len_index = lcf_lens.index(max(lcf_lens))
+    lcf = lcfs[max_len_index]
+    
+    inbredX_df = file_df.iloc[:1][[first_col]+lcf]
+    inbredX_df.to_csv('{}/inbredX_{}.csv'.format(output_path, int(round(time.time() * 1000))), index=False, encoding='utf-8_sig')
 
 
 if __name__ == '__main__':
