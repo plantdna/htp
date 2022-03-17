@@ -18,7 +18,8 @@ def cli(input_path, output_path):
 
         ilpa({
             'input_path': input_path,
-            'output_path': output_path
+            'output_path': output_path,
+            'ROOT_DIR': ROOT_DIR,
         })
     except Exception as e:
         traceback.print_exc()

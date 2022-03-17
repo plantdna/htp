@@ -23,6 +23,7 @@ def format_parent(df):
 
 
 def findLCF(df):
+    global lcfs
     '''
     找出lcf
     :return:
@@ -44,6 +45,18 @@ def findLCF(df):
         lcfs.append(df[df['smooth'] == 'x']['col'].tolist())
     
 
+def findChrLCF(df):
+    global lcfs
+    ndf = df.copy()
+    ndf.reset_index(inplace=True)
+    ndf.drop('index', axis=1, inplace=True)
+    findLCF(ndf)
+    lcf_lens = [len(lcf) for lcf in lcfs]
+    max_len_index = lcf_lens.index(max(lcf_lens))
+    lcf = lcfs[max_len_index]
+    lcfs = []
+    return lcf
+
 
 def find_parent(col, df):
     first_col = df.columns.tolist()[0]
@@ -62,6 +75,22 @@ def ilpa(params):
     '''
     input_path = params['input_path']
     output_path = params['output_path']
+    ROOT_DIR = params['ROOT_DIR']
+
+    max_lcf = []
+
+    chr_htps = {}
+    probeset_df = pd.read_csv('{}/dataset/marker_info.csv'.format(ROOT_DIR))
+    chr_probeset_df = probeset_df.groupby('chr')
+    for chr_id, chr_df in chr_probeset_df:
+        htps = []
+        for index, row in chr_df.iterrows():
+            if row['HTP'] not in chr_htps:
+                htps.append(row['HTP'])
+
+        chr_htps['chr{}'.format(str(chr_id))] = htps
+
+
     file_df  = pd.read_csv(input_path)
     columns = file_df.columns.tolist()
     first_col = columns[0]
@@ -70,12 +99,14 @@ def ilpa(params):
     compare_df['parent'] = compare_df.apply(lambda x: find_parent(x['col'], file_df[[first_col, x['col']]]), axis=1)
     
     f_df = format_parent(compare_df)
-    findLCF(f_df)
-    lcf_lens = [len(lcf) for lcf in lcfs]
-    max_len_index = lcf_lens.index(max(lcf_lens))
-    lcf = lcfs[max_len_index]
+
+    for chr_id, htps in chr_htps.items():
+        chr_f_df = f_df[f_df['col'].isin(htps)]
+        lcf = findChrLCF(chr_f_df)
+        if len(lcf) > len(max_lcf):
+            max_lcf = lcf
     
-    inbredX_df = file_df.iloc[:1][[first_col]+lcf]
+    inbredX_df = file_df.iloc[:1][[first_col]+max_lcf]
     inbredX_df.to_csv('{}/inbredX_{}.csv'.format(output_path, int(round(time.time() * 1000))), index=False, encoding='utf-8_sig')
 
 
