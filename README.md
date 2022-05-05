@@ -28,10 +28,6 @@ pip install --editable .
 
 [⏬ Download](https://htp.plantdna.site/download/htp-template-files.zip)
 
-## Tips
-
-Since the paper has not been published yet, only part of the haplotype_database.csv was disclosed here. We hope to get your understanding. Thanks so much.
-
 ## Project Structure
 
 ```
