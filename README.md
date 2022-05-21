@@ -28,44 +28,6 @@ pip install --editable .
 
 [⏬ Download](https://htp.plantdna.site/download/htp-template-files.zip)
 
-## Project Structure
-
-```
-.
-├── LICENSE
-├── README.md
-├── dataset
-│   ├── haplotype_database.csv
-│   ├── hca_template.csv
-│   ├── htp-template-files
-│   ├── htp-template-files.zip
-│   ├── marker_info.csv
-│   ├── template_genotyping.txt
-│   └── wghca_template.csv
-├── requirements.txt
-├── scripts
-│   ├── abss
-│   ├── abss_cli.py
-│   ├── base_class.py
-│   ├── hca
-│   ├── hca_cli.py
-│   ├── hlp
-│   ├── hlp_cli.py
-│   ├── hpb
-│   ├── hpb_cli.py
-│   ├── hpp
-│   ├── hpp_cli.py
-│   ├── ilpa
-│   ├── ilpa_cli.py
-│   ├── score
-│   ├── score_cli.py
-│   ├── snp2htp
-│   ├── snp2htp_cli.py
-│   ├── wghca
-│   └── wghca_cli.py
-└── setup.py
-```
-
 ## Command Set
 
 - Data comparison
@@ -73,11 +35,11 @@ pip install --editable .
   - [htp-hca](https://github.com/plantdna/htp#hca)
   - [htp-wghca](https://github.com/plantdna/htp#wghca)
 - Data prediction
-  - [htp-hpb](https://github.com/plantdna/htp#hpb)
+  - [htp-hpa](https://github.com/plantdna/htp#hpa)
   - [htp-score](https://github.com/plantdna/htp#score)
   - [htp-hpp](https://github.com/plantdna/htp#hpp)
   - [htp-ilpa](https://github.com/plantdna/htp#ilpa)
-  - [htp-hlp](https://github.com/plantdna/htp#hlp)
+  - [htp-predicting](https://github.com/plantdna/htp#predicting)
 - Group analysis
   - [abss](https://github.com/plantdna/htp#abss)
 
@@ -216,14 +178,14 @@ _Output Example_
 
 ---
 
-### HPB
+### HPA
 
 **Description**
 
-> Heterotic Pattern Building
+> Heterotic Pattern Analysis
 
 ```bash
-(venv) (base) root:~/work/plantdna/htp$ htp-hpb
+(venv) (base) root:~/work/plantdna/htp$ htp-hpa
 Please type input genotype files dir: ./
 Please type output path: ./
 ```
@@ -262,7 +224,7 @@ Please type output path: ./
 
 **Input file**
 
-> HPB output dir path
+> HPA output dir path
 
 ### HPP
 
@@ -298,14 +260,14 @@ _Input Example_
 | parent1 | 1 | ... |
 | parent2 | 1 | ... |
 
-### HLP
+### Predicting
 
 **Description**
 
 > HTP Loci Predicting
 
 ```bash
-(venv) (base) root:~/work/plantdna/htp$ htp-hlp
+(venv) (base) root:~/work/plantdna/htp$ htp-predicting
 Please type input your sequence: A-T-A---A
 Please type HTP code: HTP_0001
 ```
