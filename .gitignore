@@ -132,7 +132,9 @@ output/
 # Pyre type checker
 .pyre/
 
-*.csv
+/*.csv
+*.DS_Store
+
 *.zip
 htp-template-files
 haplotype_database_all.csv
