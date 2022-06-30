@@ -132,6 +132,7 @@ output/
 # Pyre type checker
 .pyre/
 
+*.csv
 *.zip
 htp-template-files
 haplotype_database_all.csv
